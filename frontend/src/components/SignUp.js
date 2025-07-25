@@ -1,5 +1,7 @@
 import React, { useState } from 'react'
-import { VStack, FormControl, FormLabel, Input, InputGroup, InputRightElement, Button, Show } from '@chakra-ui/react'
+import { VStack, FormControl, FormLabel, Input, InputGroup, InputRightElement, Button} from '@chakra-ui/react'
+import { useToast } from '@chakra-ui/react';
+import { warning } from 'framer-motion';
 
 function SignUp() {
 
@@ -9,12 +11,46 @@ function SignUp() {
   const [confirmpassword, Setconfirmpassword] = useState();
   const [password, Setpassword] = useState();
   const [pic, Setpic] = useState();
+  const [loading,setLoading] = useState(false);
+
+  const toast = useToast();
 
   const handleClick = () => setShow(!show);
 
-  const postDetail = (pics) => {}
+  const postDetail = (pics) => {
+    //incomplete
+    setLoading(true);
+  }
   
-  const submitHandler = () => {}
+  const submitHandler = () => {
+    setLoading(true);
+    if(!email || !name || !password || !confirmpassword){
+      toast({
+        title: "SignUp Unsuccessful",
+        description: "Please fill all the details.",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom"
+      });
+      setLoading(false);
+      return ;
+    }
+
+    if (password !== confirmpassword) {
+      toast({
+        title: "Incorrect Password",
+        description: "You have entered incorrect password",
+        status: "error",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom"
+      });
+      setLoading(false);
+      return;
+    }
+    
+  }
 
   return (
     <VStack spacing='5px'>
@@ -62,19 +98,21 @@ function SignUp() {
         </InputGroup>
       </FormControl>
 
-      <FormControl id='pic' >
+      {/* <FormControl id='pic' >
         <FormLabel>Upload your Picture</FormLabel>
         <Input type='file' 
                p={1.5} 
                accept='image/*' 
                onChange={(event) => postDetail(event.target.files[0])} />
-      </FormControl>
+      </FormControl> */}
 
       <Button
        colorScheme='pink'
        width="100%"
        style={{marginTop: 15}}
        onClick={submitHandler}
+       isLoading = {loading}
+
       >
         Sign Up
       </Button>

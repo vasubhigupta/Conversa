@@ -1,7 +1,7 @@
 import React from 'react'
 import { Container, Box, Text, Tabs, TabList, TabPanels, Tab, TabPanel,  } from '@chakra-ui/react'
-import Login from "../component/Authentication/Login"
-import SignUp from "../component/Authentication/SignUp"
+import Login from "../components/Login.js"
+import SignUp from "../components/SignUp"
 
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@300&display=swap');
