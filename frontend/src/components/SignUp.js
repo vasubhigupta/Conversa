@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { VStack, FormControl, FormLabel, Input, InputGroup, InputRightElement, Button} from '@chakra-ui/react'
 import { useToast } from '@chakra-ui/react';
-import { warning } from 'framer-motion';
+import axios from 'axios'
 
 function SignUp() {
 
@@ -48,6 +48,24 @@ function SignUp() {
       });
       setLoading(false);
       return;
+    }
+
+    try{
+      const config = {
+        headers: {
+          "Content-type" : "application/json",
+        }
+      };
+      const {data} = axios.post("/api/user",{name,email,password,pic}, config);
+      toast({
+        title: "Registration Successful",
+        status: "success",
+        duration: 5000,
+        isClosable: true,
+        position: "bottom"
+      })
+    } catch (error){
+
     }
     
   }
