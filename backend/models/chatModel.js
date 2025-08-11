@@ -1,4 +1,4 @@
-const mongoose = requie('mongoose');
+const mongoose = require('mongoose');
 
 const chatModel = mongoose.Schema(
     {
@@ -25,6 +25,6 @@ const chatModel = mongoose.Schema(
     }
 )
 
-const Chat = mongoose.model("Chat", chatModel);
+const Chats = mongoose.model("Chat", chatModel);
 
 module.exports = Chats;
